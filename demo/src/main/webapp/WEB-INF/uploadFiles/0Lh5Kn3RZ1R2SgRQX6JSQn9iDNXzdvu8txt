@@ -1,0 +1,35 @@
+fieldset 예제소스 보기
+아래 태그는 일반적인 회원정보 수정 페이지이다. 권한이 없는 경우에는 
+모든 입력폼의 비활성화가 필요하다. 
+즉 disabled 속성을 가져야할 것이다. 이를 코드로 나타낸다면...
+<form>
+   성별: <input disabled="disabled" type="gender" /><br>
+   취미: <input disabled="disabled" type="hobby" /><br>
+   나이: <input disabled="disabled" type="age" /><br>
+   ...
+   ..
+   .
+</form>
+
+이 코드가 만약 fieldset을 사용한다면 아래와 같이 사용하여 나타낼 수 있다. 아래 코드는 
+<fieldset disbled="disabled">
+   <form>
+      성별: <input type="gender" /><br>
+      취미: <input type="hobby" /><br>
+      나이: <input type="age" /><br>
+      ...
+      ..
+      .
+   </form>
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+

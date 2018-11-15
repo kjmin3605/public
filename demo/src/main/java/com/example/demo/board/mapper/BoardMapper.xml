@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.demo.board.mapper.BoardMapper">
+	
+	<select id="boardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Board;
+	</select>
+	
+	<select id="boardList" resultType="com.example.demo.board.domain.BoardVO">
+		SELECT *
+		FROM Board;
+	</select>
+	
+	<select id="boardDetail" resultType="com.example.demo.board.domain.BoardVO">
+		SELECT *
+		FROM Board
+		WHERE BNO = #{bno}
+	</select>
+	
+	<insert id="boardInsert" parameterType="com.example.demo.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="bno">
+	    INSERT INTO
+	    BOARD (BNO, SUBJECT,CONTENT,WRITER,NAME,CREATED_DATE)
+		VALUES(#{bno},#{subject},#{content},#{writer},#{name},now()) 
+	</insert>
+	
+	<insert id="fileInsert" parameterType="com.example.demo.board.domain.FileVO">
+		INSERT INTO
+		FILES (FNO, BNO, FILENAME, FILEORINAME, FILEURL)
+    	VALUES (#{fno},#{bno},#{fileName},#{fileOriName},#{fileUrl})
+    	<!-- 시퀀스가 자동 증가인 경우 insert 후에 시퀀스 값을 리턴받을 경우에 설정해줍니다. 
+    	게시글 작성 시 게시글 번호가 파일DB에 등록되어야 하기때문에 시퀀스 값을 리턴받아서 파일DB에 등록~ -->
+	</insert>
+
+	<select id="fileDetail" parameterType="int" resultType="com.example.demo.board.domain.FileVO">
+		SELECT *
+		FROM Files
+		WHERE
+		BNO = #{bno}
+	</select>
+	
+	<update id="boardUpdate" parameterType="com.example.demo.board.domain.BoardVO">
+		  UPDATE BOARD
+		  SET
+		  <if test="subject != null">
+            SUBJECT = #{subject}
+        </if>
+        <if test="subject != null and content != null"> , </if>
+        <if test="content != null">
+            CONTENT = #{content}
+        </if>
+        WHERE BNO = #{bno}
+	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM BOARD WHERE BNO = #{bno}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
